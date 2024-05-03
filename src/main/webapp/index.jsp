@@ -11,7 +11,9 @@
 <ul>
 <li>login</li>
 <li>git test</li>
+<li><a href="./user/main.jsp">user main</a></li>
 </ul>
 </h1>
 </body>
 </html>
+

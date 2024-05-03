@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<li><a href="list.jsp">User List</a></li>
 </body>
 </html>
