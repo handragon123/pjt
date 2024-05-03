@@ -7,11 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>
-<ul>
-<li>login</li>
-<li>git test</li>
-</ul>
-</h1>
+
 </body>
 </html>
