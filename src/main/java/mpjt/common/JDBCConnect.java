@@ -13,7 +13,7 @@ public class JDBCConnect {
 		Connection conn = null;
 		try {
 			String driver = "com.mysql.cj.jdbc.Driver";
-			String url = "jdbc:mysql://localhost:3306/mpjt?serverTimezone=UTC";
+			String url = "jdbc:mysql://localhost:3306/sys?serverTimezone=UTC";
 			String user = "root";
 			String pw = "rpass";
 			Class.forName(driver);

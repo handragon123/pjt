@@ -1,55 +1,62 @@
 package mpjt.dao;
 
 import java.sql.Connection;
-
-
-
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
-import mpjt.common.JDBCConnect;
 import mpjt.dto.UserDTO;
 
 public class UserDAO {
+
+	private Connection conn;
+	private PreparedStatement pstmt;
+	private ResultSet rs;
 	
-	public List<UserDTO> getUsers(){
-		System.out.println("getUsers 메서드 실행");
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;		
-
-		List<UserDTO> userList = new ArrayList<>();
-
-		try{
-			// 2. connection
-			conn = JDBCConnect.getConnection();
-			
-			// 3. sql창
-			String sql = "select user_idx, user_id, user_password, user_name, user_gen from user";
-			pstmt = conn.prepareStatement(sql);
-			// 4. execute
-			rs = pstmt.executeQuery();
-			// 5. rs처리 : id값만 list에 저장
-			while(rs.next()) {
-				int idx = rs.getInt("user_idx");
-				String id = rs.getString("user_id");
-				String password = rs.getString("user_password");
-				String name = rs.getString("user_name");
-				String gen = rs.getString("user_gen");
-				UserDTO dto = new UserDTO(idx, id, password, name, gen);
-				userList.add(dto);
-				System.out.println("getUsers 메서드 성공");
-			}
-		}catch(Exception e) {
+	public UserDAO() { // 예외처리 , mysql에 접속하게 해주는 부분임 
+		try {
+			String dbURL = "jdbc:mysql://localhost:3306/mpjt";
+			String dbID = "root";
+			String dbPassword = "dksk1103";
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
+		} catch(Exception e) {
 			e.printStackTrace();
-		}finally {
-			JDBCConnect.close(rs, pstmt, conn);
 		}
-		return userList;
 	}
 
+	public int login(String user_id, String user_password) { // 내가 sql에 지정한 변수로 써야함 
+		String SQL = "SELECT user_password FROM user WHERE user_id = ?";
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, user_id);
+		    rs = pstmt.executeQuery();
+		    if(rs.next()) {
+		    	if(rs.getString(1).equals(user_password)) 
+		    		return 1; // 로그인 성공 
+		    	else 
+		    		return 0; //비밀번호 불일치  
+		    }
+		    return -1; // 아이디가 없음  
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -2; // 데이터베이스 오류 
+	}
+	
+	public int join(UserDTO user) {
+		String SQL = "INSERT INTO user VALUES (?,?,?,?,?)";
+		try {
+			pstmt = conn.prepareStatement(SQL);			
+			pstmt.setInt(1, user.getUser_idx());
+			pstmt.setString(2, user.getUser_id());
+			pstmt.setString(3, user.getUser_password());
+			pstmt.setString(4, user.getUser_name());
+			pstmt.setString(5, user.getUser_gen());
+			return pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
 }
