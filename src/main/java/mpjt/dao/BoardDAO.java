@@ -45,23 +45,6 @@ public class BoardDAO {
 		return -1; // db 오류 알림 
 	}
 	
-	public int write(String fr_title, String user_id, String fr_cont) {
-		String SQL = "INSERT INTO fr_board values (?,?,?,?,?,?)";
-		try {
-			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setInt(1, getNext());
-			pstmt.setString(2, fr_title);
-			pstmt.setString(3, user_id);
-			pstmt.setString(4, getDate());
-			pstmt.setString(5, fr_cont);
-			pstmt.setInt(6, 1);
-			rs = pstmt.executeQuery();
-			return pstmt.executeUpdate();
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		return -1; 
-	}
 	
 	public List<BoardDTO> selectList(Map<String, String> map){
 		Connection conn = null;
@@ -154,5 +137,34 @@ public class BoardDAO {
 
 		return totalCount;
 	}
+	
+	public int insertWrite(BoardDTO dto) {
+		Connection conn = null;
+	    PreparedStatement pstmt = null;  
+	    int rs = 0;
+	    try {
+	       // 2. conn
+	       conn = JDBCConnect.getConnection();
+	       
+	       // 3. sql + 쿼리창
+	       String sql = "insert into free_board(fr_title, fr_cont, user_id) values(?,?,?)";
+	       pstmt = conn.prepareStatement(sql);
+	       
+	       // 4. ? 세팅
+	       pstmt.setString(1, dto.getFr_title());
+	       pstmt.setString(2, dto.getFr_cont());
+	       pstmt.setString(3, dto.getUser_id());
+	       
+	       // 5. execute 실행
+	       rs = pstmt.executeUpdate();
+	       
+	    } catch (Exception e) {
+	       e.printStackTrace();
+	    }finally {
+	       JDBCConnect.close(pstmt, conn);
+	    }
+	    return rs;
+	}
+
 
 }
