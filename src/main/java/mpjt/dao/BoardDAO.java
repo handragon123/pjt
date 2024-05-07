@@ -4,20 +4,17 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
+import mpjt.dto.BoardDTO;
 import mpjt.common.JDBCConnect;
 
 public class BoardDAO {
 	private Connection conn;
 	private ResultSet rs;
-	
-	public BoardDAO() { // 예외처리 , mysql에 접속하게 해주는 부분임 
-		try {
-			conn = JDBCConnect.getConnection();
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
 	
 	public String getDate() {
 		String SQL = "SELECT NOW()";
@@ -65,4 +62,97 @@ public class BoardDAO {
 		}
 		return -1; 
 	}
+	
+	public List<BoardDTO> selectList(Map<String, String> map){
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;				
+
+		// search 여부
+		boolean isSearch = false;
+		if(map.get("searchWord") != null && map.get("searchWord").length() != 0) {
+			isSearch = true;
+		}	
+
+		List<BoardDTO> bbs = new ArrayList<BoardDTO>();
+		String sql = "select fr_idx, user_id,fr_title,fr_cont,fr_visitnum, fr_like, fr_regd from free_board";
+		if(isSearch) {
+			sql += " where " + map.get("searchField") + " like ? ";
+		}
+		sql += " order by fr_idx desc";
+
+		conn = JDBCConnect.getConnection();
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			if(isSearch) {
+				pstmt.setString(1, "%" + map.get("searchWord") + "%");
+			}
+			rs = pstmt.executeQuery();
+
+			while(rs.next()) {
+				int fr_idx = rs.getInt("fr_idx");
+				String user_id = rs.getString("user_id");
+				String title = rs.getString("fr_title");
+				String cont = rs.getString("fr_cont");
+				int visitnum = rs.getInt("fr_visitnum");
+				int like = rs.getInt("fr_like");
+				String regd = rs.getString("fr_regd");
+				BoardDTO dto = new BoardDTO(fr_idx, user_id, title, cont, visitnum, like, regd);
+				bbs.add(dto);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCConnect.close(rs, pstmt, conn);
+		}
+
+
+
+		return bbs;
+	}
+	
+	public int selectCount(Map<String, String> map){
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;				
+
+		int totalCount = 0;
+
+		// search 여부
+		boolean isSearch = false;
+		if(map.get("searchWord") != null && map.get("searchWord").length() != 0) {
+			isSearch = true;
+		}		
+
+		String sql = "select count(fr_idx) as cnt from free_board ";
+		if(isSearch) {
+			//sql += " and " + map.get("searchField") + " like concat('%',?,'%')";
+			sql += " where " + map.get("searchField") + " like ? ";
+		}
+		System.out.println(sql);
+		conn = JDBCConnect.getConnection();
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			if(isSearch) {
+				//pstmt.setString(1, map.get("searchWord"));
+				pstmt.setString(1, "%" + map.get("searchWord") + "%");
+			}
+			rs = pstmt.executeQuery();
+
+			if(rs.next()) {
+				totalCount = rs.getInt("cnt");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCConnect.close(rs, pstmt, conn);
+		}		
+
+		return totalCount;
+	}
+
 }

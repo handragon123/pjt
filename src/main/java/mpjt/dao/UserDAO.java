@@ -100,6 +100,7 @@ public class UserDAO {
 	    }finally {
 	       JDBCConnect.close(pstmt, conn);
 	    }
+	    System.out.println("회원가입 실패");
 	    return rs;
 	}
 }

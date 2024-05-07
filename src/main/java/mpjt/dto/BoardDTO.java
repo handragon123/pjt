@@ -3,16 +3,27 @@ package mpjt.dto;
 public class BoardDTO {
 	private int fr_idx;
 	private String user_id;
-	private String user_idx;
+	private int user_idx;
 	private String fr_title;
 	private String fr_cont;
-	private String fr_visitnum;
-	private String fr_like;
+	private int fr_visitnum;
+	private int fr_like;
 	private String fr_file;
 	private String fr_upd;
 	private String fr_regd;
 	
 	public BoardDTO() {
+	}
+	
+	public BoardDTO(int fr_idx, String user_id, String fr_title, String fr_cont, int fr_visitnum, int fr_like, String fr_regd) {
+	this.fr_idx = fr_idx;
+	this.user_id = user_id;
+	this.fr_title = fr_title;
+	this.fr_cont = fr_cont;
+	this.fr_visitnum = fr_visitnum;
+	this.fr_like = fr_like;
+	this.fr_regd = fr_regd;
+	
 	}
 	
 	public int getFr_idx() {
@@ -27,10 +38,10 @@ public class BoardDTO {
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
 	}
-	public String getUser_idx() {
+	public int getUser_idx() {
 		return user_idx;
 	}
-	public void setUser_idx(String user_idx) {
+	public void setUser_idx(int user_idx) {
 		this.user_idx = user_idx;
 	}
 	public String getFr_title() {
@@ -45,16 +56,16 @@ public class BoardDTO {
 	public void setFr_cont(String fr_cont) {
 		this.fr_cont = fr_cont;
 	}
-	public String getFr_visitnum() {
+	public int getFr_visitnum() {
 		return fr_visitnum;
 	}
-	public void setFr_visitnum(String fr_visitnum) {
+	public void setFr_visitnum(int fr_visitnum) {
 		this.fr_visitnum = fr_visitnum;
 	}
-	public String getFr_like() {
+	public int getFr_like() {
 		return fr_like;
 	}
-	public void setFr_like(String fr_like) {
+	public void setFr_like(int fr_like) {
 		this.fr_like = fr_like;
 	}
 	public String getFr_file() {
