@@ -11,21 +11,26 @@ public class BoardDTO {
 	private String fr_file;
 	private String fr_upd;
 	private String fr_regd;
-	
+
 	public BoardDTO() {
 	}
-	
+
 	public BoardDTO(int fr_idx, String user_id, String fr_title, String fr_cont, int fr_visitnum, int fr_like, String fr_regd) {
-	this.fr_idx = fr_idx;
-	this.user_id = user_id;
-	this.fr_title = fr_title;
-	this.fr_cont = fr_cont;
-	this.fr_visitnum = fr_visitnum;
-	this.fr_like = fr_like;
-	this.fr_regd = fr_regd;
-	
+		this.fr_idx = fr_idx;
+		this.user_id = user_id;
+		this.fr_title = fr_title;
+		this.fr_cont = fr_cont;
+		this.fr_visitnum = fr_visitnum;
+		this.fr_like = fr_like;
+		this.fr_regd = fr_regd;
 	}
-	
+
+	public BoardDTO(String fr_title, String fr_cont, String user_id) {
+		this.user_id = user_id;
+		this.fr_title = fr_title;
+		this.fr_cont = fr_cont;
+	}
+
 	public int getFr_idx() {
 		return fr_idx;
 	}
