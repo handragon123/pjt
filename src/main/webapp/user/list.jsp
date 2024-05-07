@@ -24,16 +24,16 @@ List<UserDTO> userList =  dao.getUsers();
 <hr>
 <h1>User List
 <table border="1">
-<tr><th>IDX</th><th>ID</th><th>PW</th><th>Name</th><th>Nickname</th></tr>
+<tr><th>IDX</th><th>ID</th><th>PW</th><th>Name</th><th>gen</th></tr>
 <%
 	for(UserDTO dto : userList) {
 		int idx = dto.getUser_idx();
 		String id = dto.getUser_id();
 		String password = dto.getUser_password();
 		String name = dto.getUser_name();
-		String nickname = dto.getUser_nickname();
+		String gen = dto.getUser_gen();
 %>
-<tr><td><%=idx %><td><%=id %></td><td><%=password %></td><td><%=name %></td><td><%=nickname %></td></tr>
+<tr><td><%=idx %><td><%=id %></td><td><%=password %></td><td><%=name %></td><td><%=gen %></td></tr>
 <%} %>
 </table>
 </h1>
