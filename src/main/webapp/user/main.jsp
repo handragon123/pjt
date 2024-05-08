@@ -68,7 +68,6 @@
     .dropdown:hover .dropdown-menu {
         display: block;
     }
-    
 </style>
 <title>JSP 게시판 웹 사이트 </title>
 </head>
@@ -114,13 +113,11 @@
 		%>		
 		<ul class="nav navbar-nav navbar-right">
 			<li class="dropdown">
-				<a href="./list.jsp" class="dropdown-toggle"
+				<a href="#" class="dropdown-toggle"
 					data-toggle="dropdown" role="button" aria-haspopup="true"
-					aria-expanded="false">회원관리
-					 <span class="caret">로그인 </span></a>
+					aria-expanded="false">회원관리 <span class="caret">로그인 </span></a>
 				<ul class="dropdown-menu">
 					<li><a href="logout.jsp">로그아웃 </a></li>
-					<li><a href="delete.jsp">회원탈퇴 </a></li>
 				</ul>	
 			</li>
 		</ul>
