@@ -85,7 +85,7 @@ int totalCount = dao.selectCount(map);
 		<tr align="center">
 			<td width="10%"><%=bbs.getFr_idx() %></td>
 			<td width="20%"><%=bbs.getUser_id() %></td>
-			<a href="view.jsp?num=<%=bbs.getFr_idx()%>"><%=bbs.getFr_title() %></a>			
+			<td width="20%"><a href="view.jsp?num=<%=bbs.getFr_idx()%>"><%=bbs.getFr_title() %></a></td>			
 			<td width="20%"><%=bbs.getFr_cont() %></td>			
 			<td width="10%"><%=bbs.getFr_visitnum() %></td>
 			<td width="10%"><%=bbs.getFr_like() %></td>
