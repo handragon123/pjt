@@ -1,7 +1,6 @@
 package mpjt.service.board;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,8 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
 import mpjt.dao.BoardDAO;
 import mpjt.dto.BoardDTO;
+
 
 @WebServlet("/board/DeleteProc")
 public class DeleteProc extends HttpServlet {
@@ -32,7 +33,9 @@ public class DeleteProc extends HttpServlet {
 		
 		// 3. DTO
 		BoardDTO dto = new BoardDTO();		
+
 		dto.setFr_idx(num);
+
 		
 		// 4. DAO 
 		BoardDAO dao = new BoardDAO();
@@ -40,6 +43,7 @@ public class DeleteProc extends HttpServlet {
 		
 		// 5. move
 		String path = request.getContextPath() + "/mbboard/bbs.jsp";
+
 		response.sendRedirect(path);
 	}
 

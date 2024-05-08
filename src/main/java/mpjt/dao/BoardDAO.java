@@ -138,11 +138,14 @@ public class BoardDAO {
 	    return rs;
 	}
 	
+
 	// 게시글 보기
+
 	public BoardDTO selectView(BoardDTO dto){
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;				
+
 
 		String sql = "select fr_idx, fr_title, fr_cont,A.user_id, fr_regd, fr_visitnum";
 		sql += " from free_board A, user B ";
@@ -165,6 +168,9 @@ public class BoardDAO {
 				dto = new BoardDTO(num, title, content, id, postdate, visitcount);				
 			}
 
+
+
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -173,6 +179,7 @@ public class BoardDAO {
 		
 		return dto;
 	}
+
 	// 조회수
 	public int updateVisitcount(BoardDTO dto) {
 		Connection conn = null;

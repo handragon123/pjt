@@ -1,7 +1,6 @@
 package mpjt.service.board;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,9 +36,11 @@ public class UpdateProc extends HttpServlet {
 		
 		// 3. DTO
 		BoardDTO dto = new BoardDTO();		
+
 		dto.setFr_idx(num);
 		dto.setFr_title(title);
 		dto.setFr_cont(content);
+
 		
 		// 4. DAO 
 		BoardDAO dao = new BoardDAO();
@@ -47,6 +48,7 @@ public class UpdateProc extends HttpServlet {
 		
 		// 5. move
 		String path = request.getContextPath() + "/mbboard/view.jsp?num="+num;
+
 		response.sendRedirect(path);
 	}
 

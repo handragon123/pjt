@@ -7,6 +7,7 @@ request.setCharacterEncoding("utf-8");
 String sNum = request.getParameter("num"); 
 int num = Integer.parseInt(sNum);
 BoardDTO dto = new BoardDTO();
+
 dto.setFr_idx(num);
 %>    
 <% // db - select
@@ -38,6 +39,7 @@ dto = dao.selectView(dto);
 </script>
 </head>
 <body>
+
 <%-- <%@ include file="../user/main.jsp" %> --%>
 <li><a href="bbs.jsp">게시판으로</a></li>
 <h2>글 상세보기 </h2>
@@ -55,6 +57,7 @@ dto = dao.selectView(dto);
 	<tr><td colspan="4">
 	<a href="list.jsp">[List]</a> |  
 <%if(session.getAttribute("user_id") != null && session.getAttribute("user_id").equals(dto.getUser_id())) {%>
+
 	<a href="update.jsp?num=<%=num%>">[Update]</a> | 
 	<a href="javascript:del('<%=num%>');">[Delete]</a>
 <%} %>

@@ -1,5 +1,6 @@
 <%@page import="mpjt.dao.BoardDAO"%>
 <%@page import="mpjt.dto.BoardDTO"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../common/sessionCheck.jsp"%>      
@@ -8,7 +9,9 @@ request.setCharacterEncoding("utf-8");
 String sNum = request.getParameter("num"); 
 int num = Integer.parseInt(sNum);
 BoardDTO dto = new BoardDTO();
+
 dto.setFr_idx(num);
+
 %>    
 <% // db - select
 BoardDAO dao = new BoardDAO();
@@ -49,6 +52,7 @@ function validateForm() {
 	<input type="hidden" name="num" value="<%=num%>">
 	<table border="1" width="90%">
 		<tr>
+
 		<td>Num</td><td><%=dto.getFr_idx() %></td>
 		<td></td><td><%=dto.getUser_id() %></td>	
 		</tr>
