@@ -47,7 +47,7 @@ int totalCount = dao.selectCount(map);
 		<span class="icon-bar"></span>
 		<span class="icon-bar"></span>
 		</button>
-		<a class="navbar-brand" href="main.jsp">JSP게시판 웹 사이트 </a>
+		<a class="navbar-brand" href="../user/main.jsp">JSP게시판 웹 사이트 </a>
 	</div>
 	</nav>
 	<div class="container">

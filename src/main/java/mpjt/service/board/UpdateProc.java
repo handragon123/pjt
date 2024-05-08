@@ -8,8 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model1.dao.BoardDAO;
-import model1.dto.BoardDTO;
+import mpjt.dao.BoardDAO;
+import mpjt.dto.BoardDTO;
+
 
 @WebServlet("/board/UpdateProc")
 public class UpdateProc extends HttpServlet {
@@ -35,16 +36,19 @@ public class UpdateProc extends HttpServlet {
 		
 		// 3. DTO
 		BoardDTO dto = new BoardDTO();		
-		dto.setNum(num);
-		dto.setTitle(title);
-		dto.setContent(content);
+
+		dto.setFr_idx(num);
+		dto.setFr_title(title);
+		dto.setFr_cont(content);
+
 		
 		// 4. DAO 
 		BoardDAO dao = new BoardDAO();
 		dao.updateWrite(dto);
 		
 		// 5. move
-		String path = request.getContextPath() + "/board/view.jsp?num="+num;
+		String path = request.getContextPath() + "/mbboard/view.jsp?num="+num;
+
 		response.sendRedirect(path);
 	}
 

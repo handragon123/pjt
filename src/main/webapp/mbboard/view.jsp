@@ -7,7 +7,8 @@ request.setCharacterEncoding("utf-8");
 String sNum = request.getParameter("num"); 
 int num = Integer.parseInt(sNum);
 BoardDTO dto = new BoardDTO();
-dto.set(num);
+
+dto.setFr_idx(num);
 %>    
 <% // db - select
 BoardDAO dao = new BoardDAO();
@@ -38,22 +39,25 @@ dto = dao.selectView(dto);
 </script>
 </head>
 <body>
-<%@ include file="../common/menu.jsp" %>
+
+<%-- <%@ include file="../user/main.jsp" %> --%>
+<li><a href="bbs.jsp">게시판으로</a></li>
 <h2>글 상세보기 </h2>
 <table border="1" width="90%">
 	<tr>
-	<td>Num</td><td><%=dto.getNum() %></td>
-	<td>ID(Name)</td><td><%=dto.getId()%>(<%=dto.getName() %>)</td>	
+	<td>글 번호</td><td><%=dto.getFr_idx() %></td>
+	<td>작성자</td><td><%=dto.getUser_id() %></td>	
 	</tr>
 	<tr>
-	<td>PostDate</td><td><%=dto.getPostdate() %></td>
-	<td>Visitcount</td><td><%=dto.getVisitcount() %></td>	
+	<td>작성일자</td><td><%=dto.getFr_regd() %></td>
+	<td>조회수</td><td><%=dto.getFr_visitnum() %></td>	
 	</tr>
-	<tr><td>Title</td><td colspan="3"><%=dto.getTitle() %></td></tr>
-	<tr><td>Content</td><td colspan="3"><%=dto.getContent() %></td></tr>
+	<tr><td>제목</td><td colspan="3"><%=dto.getFr_title() %></td></tr>
+	<tr><td>내용</td><td colspan="3"><%=dto.getFr_cont() %></td></tr>
 	<tr><td colspan="4">
 	<a href="list.jsp">[List]</a> |  
-<%if(session.getAttribute("id") != null && session.getAttribute("id").equals(dto.getId())) {%>
+<%if(session.getAttribute("user_id") != null && session.getAttribute("user_id").equals(dto.getUser_id())) {%>
+
 	<a href="update.jsp?num=<%=num%>">[Update]</a> | 
 	<a href="javascript:del('<%=num%>');">[Delete]</a>
 <%} %>

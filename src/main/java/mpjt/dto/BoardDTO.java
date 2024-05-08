@@ -15,6 +15,10 @@ public class BoardDTO {
 	public BoardDTO() {
 	}
 
+	public BoardDTO(int fr_idx) {
+		this.fr_idx = fr_idx;
+	}
+	
 	public BoardDTO(int fr_idx, String user_id, String fr_title, String fr_cont, int fr_visitnum, int fr_like, String fr_regd) {
 		this.fr_idx = fr_idx;
 		this.user_id = user_id;
@@ -30,7 +34,16 @@ public class BoardDTO {
 		this.fr_title = fr_title;
 		this.fr_cont = fr_cont;
 	}
-
+// num, title, content, id, postdate, visitcount
+	public BoardDTO(int fr_idx, String fr_title, String fr_cont, String user_id, String fr_regd, int fr_visitnum) {
+		this.fr_idx = fr_idx;
+		this.fr_title = fr_title;
+		this.fr_cont = fr_cont;
+		this.user_id = user_id;
+		this.fr_visitnum = fr_visitnum;
+		this.fr_regd = fr_regd;
+	}
+	
 	public int getFr_idx() {
 		return fr_idx;
 	}

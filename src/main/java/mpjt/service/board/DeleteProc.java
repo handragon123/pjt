@@ -8,8 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model1.dao.BoardDAO;
-import model1.dto.BoardDTO;
+
+import mpjt.dao.BoardDAO;
+import mpjt.dto.BoardDTO;
+
 
 @WebServlet("/board/DeleteProc")
 public class DeleteProc extends HttpServlet {
@@ -31,14 +33,17 @@ public class DeleteProc extends HttpServlet {
 		
 		// 3. DTO
 		BoardDTO dto = new BoardDTO();		
-		dto.setNum(num);
+
+		dto.setFr_idx(num);
+
 		
 		// 4. DAO 
 		BoardDAO dao = new BoardDAO();
 		dao.deleteWrite(dto);
 		
 		// 5. move
-		String path = request.getContextPath() + "/board/list.jsp";
+		String path = request.getContextPath() + "/mbboard/bbs.jsp";
+
 		response.sendRedirect(path);
 	}
 

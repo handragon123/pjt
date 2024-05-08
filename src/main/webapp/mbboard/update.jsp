@@ -1,5 +1,6 @@
-<%@page import="model1.dao.BoardDAO"%>
-<%@page import="model1.dto.BoardDTO"%>
+<%@page import="mpjt.dao.BoardDAO"%>
+<%@page import="mpjt.dto.BoardDTO"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../common/sessionCheck.jsp"%>      
@@ -8,7 +9,9 @@ request.setCharacterEncoding("utf-8");
 String sNum = request.getParameter("num"); 
 int num = Integer.parseInt(sNum);
 BoardDTO dto = new BoardDTO();
-dto.setNum(num);
+
+dto.setFr_idx(num);
+
 %>    
 <% // db - select
 BoardDAO dao = new BoardDAO();
@@ -42,7 +45,6 @@ function validateForm() {
 </script>
 </head>
 <body>
-<%@ include file="../common/menu.jsp" %>
 <h2>글 수정하기 </h2>
 <form name="writeForm" 
 	action="<%=request.getContextPath() %>/board/UpdateProc" 
@@ -50,23 +52,24 @@ function validateForm() {
 	<input type="hidden" name="num" value="<%=num%>">
 	<table border="1" width="90%">
 		<tr>
-		<td>Num</td><td><%=dto.getNum() %></td>
-		<td>ID(Name)</td><td><%=dto.getId()%>(<%=dto.getName() %>)</td>	
+
+		<td>Num</td><td><%=dto.getFr_idx() %></td>
+		<td></td><td><%=dto.getUser_id() %></td>	
 		</tr>
 		<tr>
-		<td>PostDate</td><td><%=dto.getPostdate() %></td>
-		<td>Visitcount</td><td><%=dto.getVisitcount() %></td>	
+		<td>PostDate</td><td><%=dto.getFr_regd() %></td>
+		<td>Visitcount</td><td><%=dto.getFr_visitnum() %></td>	
 		</tr>
 		<tr><td>Title</td><td colspan="3">
-		<input type="text" name="title" value="<%=dto.getTitle() %>" style="width:90%">
+		<input type="text" name="title" value="<%=dto.getFr_title() %>" style="width:90%">
 		</td></tr>
 		<tr><td>Content</td><td colspan="3">
-		<textarea name="content" style="width:90%; height:100px"><%=dto.getContent() %></textarea>
+		<textarea name="content" style="width:90%; height:100px"><%=dto.getFr_cont() %></textarea>
 		</td></tr>
 		<tr><td colspan="4">
-		<a href="list.jsp">[List]</a> |  
+		<a href="bbs.jsp">[List]</a> |  
 		<a href="view.jsp?num=<%=num%>">[View]</a> |		
-	<%if(session.getAttribute("id") != null && session.getAttribute("id").equals(dto.getId())) {%>
+	<%if(session.getAttribute("user_id") != null && session.getAttribute("user_id").equals(dto.getUser_id())) {%>
 		<a href="javascript:validateForm();">[Update]</a> 
 	<%} %>
 		</td></tr>		
