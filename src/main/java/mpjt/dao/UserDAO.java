@@ -24,17 +24,20 @@ public class UserDAO {
          conn = JDBCConnect.getConnection();
          
          // 3. sql창
-         String sql = "select user_id, user_password, user_name, user_gen from user;";
+         String sql = "select user_idx, user_id, user_password, user_name, user_gen, user_upd, user_regd from user;";
          pstmt = conn.prepareStatement(sql);
          // 4. execute
          rs = pstmt.executeQuery();
          // 5. rs처리 : id값만 list에 저장
          while(rs.next()) {
+        	int idx = rs.getInt("user_idx");
             String id = rs.getString("user_id");
             String password = rs.getString("user_password");
             String name = rs.getString("user_name");
             String gen = rs.getString("user_gen");
-            UserDTO dto = new UserDTO(id, password, name, gen);
+            String update = rs.getString("user_upd");
+            String regdate = rs.getString("user_regd");
+            UserDTO dto = new UserDTO(idx, id, password, name, gen, update, regdate);
             userList.add(dto);
          }
       }catch(Exception e) {

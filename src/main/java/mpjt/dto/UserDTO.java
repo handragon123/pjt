@@ -17,8 +17,24 @@ public class UserDTO {
 
    public UserDTO() {
    }
+   
+   
 
-   public UserDTO(String user_id, String user_password, String user_name, String user_gen) {
+   public UserDTO(int user_idx, String user_id, String user_password, String user_name, String user_gen, String user_upd,
+		String user_regd) {
+	super();
+	this.user_idx = user_idx;
+	this.user_id = user_id;
+	this.user_password = user_password;
+	this.user_name = user_name;
+	this.user_gen = user_gen;
+	this.user_upd = user_upd;
+	this.user_regd = user_regd;
+}
+
+
+
+public UserDTO(String user_id, String user_password, String user_name, String user_gen) {
       super();
       this.user_id = user_id;
       this.user_password = user_password;

@@ -55,7 +55,7 @@ dto = dao.selectView(dto);
 	<tr><td>제목</td><td colspan="3"><%=dto.getFr_title() %></td></tr>
 	<tr><td>내용</td><td colspan="3"><%=dto.getFr_cont() %></td></tr>
 	<tr><td colspan="4">
-	<a href="list.jsp">[List]</a> |  
+	<a href="bbs.jsp">[List]</a> |  
 <%if(session.getAttribute("user_id") != null && session.getAttribute("user_id").equals(dto.getUser_id())) {%>
 
 	<a href="update.jsp?num=<%=num%>">[Update]</a> | 
