@@ -47,7 +47,7 @@ int totalCount = dao.selectCount(map);
 		<span class="icon-bar"></span>
 		<span class="icon-bar"></span>
 		</button>
-		<a class="navbar-brand" href="main.jsp">JSP게시판 웹 사이트 </a>
+		<a class="navbar-brand" href="../user/main.jsp">JSP게시판 웹 사이트 </a>
 	</div>
 	</nav>
 	<div class="container">
@@ -85,7 +85,7 @@ int totalCount = dao.selectCount(map);
 		<tr align="center">
 			<td width="10%"><%=bbs.getFr_idx() %></td>
 			<td width="20%"><%=bbs.getUser_id() %></td>
-			<td width="10%"><%=bbs.getFr_title() %></td>			
+			<a href="view.jsp?num=<%=bbs.getFr_idx()%>"><%=bbs.getFr_title() %></a>			
 			<td width="20%"><%=bbs.getFr_cont() %></td>			
 			<td width="10%"><%=bbs.getFr_visitnum() %></td>
 			<td width="10%"><%=bbs.getFr_like() %></td>
