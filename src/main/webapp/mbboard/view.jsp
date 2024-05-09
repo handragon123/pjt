@@ -60,8 +60,9 @@ dto = dao.selectView(dto);
 
 	<a href="update.jsp?num=<%=num%>">[Update]</a> | 
 	<a href="javascript:del('<%=num%>');">[Delete]</a>
+
 <%} %>
-	</td></tr>
+	
 	
 </table>
 
