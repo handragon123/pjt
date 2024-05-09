@@ -1,6 +1,6 @@
-<%@page import="mpjt.dto.BoardDTO"%>
+<%@page import="mpjt.dto.RestDTO"%>
 <%@page import="java.util.List"%>
-<%@page import="mpjt.dao.BoardDAO"%>
+<%@page import="mpjt.dao.RestDAO"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -14,8 +14,10 @@ Map<String, String> map = new HashMap<>();
 map.put("searchField", searchField);
 map.put("searchWord", searchWord);
 
-BoardDAO dao = new BoardDAO();
-List<BoardDTO> boardLists = dao.selectList(map);
+
+RestDAO dao = new RestDAO();
+
+List<RestDTO> restLists = dao.selectList(map);
 int totalCount = dao.selectCount(map);
 %>
 
@@ -58,8 +60,8 @@ int totalCount = dao.selectCount(map);
 	<tr>	
 	<td>
 		<select name="searchField">
-			<option value="fr_title">제목</option>
-			<option value="fr_cont">내용</option>
+			<option value="rs_name">이름</option>
+			<option value="rs_addr">주소</option>
 		</select>
 		<input type="text" name="searchWord">
 		<input type="submit" value="Search">
@@ -71,27 +73,27 @@ int totalCount = dao.selectCount(map);
 <tr><td colspan="5">&nbsp;<b>전체 : <%=totalCount %></b></td></tr>
 	<tr>
 		<th width="10%">번호</th>
-		<th width="20%">작성자</th>
-		<th width="10%">제목</th>
-		<th width="20%">내용</th>
+		<th width="10%">이름</th>
+		<th width="10%">주소</th>
+		<th width="10%">전화번호</th>
+		<th width="20%">영업시간</th>
 		<th width="10%">조회수</th>
-		<th width="10%">좋아요</th>
-		<th width="20%">등록일</th>
+		<th width="10%">종류</th>
+		<th width="20%">리뷰</th>
 	</tr>
-<%if(boardLists.isEmpty()) {%>	
+<%if(restLists.isEmpty()) {%>	
 	<tr><td colspan="5">&nbsp;<b>Data Not Found!!</b></td></tr>
 <%}else{ %>
-	<%for(BoardDTO bbs : boardLists){ %>	
+	<%for(RestDTO rest : restLists){ %>	
 		<tr align="center">
-			<td width="10%"><%=bbs.getFr_idx() %></td>
-			<td width="20%"><%=bbs.getUser_id() %></td>
-
-			<td><a href="view.jsp?num=<%=bbs.getFr_idx()%>"><%=bbs.getFr_title() %></a></td>			
-
-			<td width="20%"><%=bbs.getFr_cont() %></td>			
-			<td width="10%"><%=bbs.getFr_visitnum() %></td>
-			<td width="10%"><%=bbs.getFr_like() %></td>
-			<td width="20%"><%=bbs.getFr_regd() %></td>
+			<td width="10%"><%=rest.getRs_idx() %></td>
+			<td><a href="view.jsp?num=<%=rest.getRs_idx()%>"><%=rest.getRs_name() %></a></td>
+			<td width="10%"><%=rest.getRs_addr() %></td>
+			<td width="10%"><%=rest.getRs_tell()%></td>			
+			<td width="20%"><%=rest.getRs_hour() %></td>			
+			<td width="10%"><%=rest.getRs_visitnum() %></td>
+			<td width="10%"><%=rest.getRs_type() %></td>
+			<td width="20%"><%=rest.getRs_reviews() %></td>
 		</tr>
 	<%} %>
 <%} %>
@@ -106,10 +108,3 @@ int totalCount = dao.selectCount(map);
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 </body>
 </html>
-
-
-
-
-
-
-

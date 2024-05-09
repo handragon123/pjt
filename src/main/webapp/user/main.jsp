@@ -93,7 +93,10 @@
 		<ul class="nav navbar-nav">
 			<li class="active"><a href="main.jsp">메인 </a></li>
 			<li><a href="../mbboard/bbs.jsp">게시판 </a></li>
+			<li><a href="../Rest/restmain.jsp">음식 게시판 </a></li>
 		</ul>
+		
+		
 		<%
 			if(user_id == null ){
 		%>		
@@ -118,7 +121,9 @@
 					aria-expanded="false">회원관리 <span class="caret">로그인 </span></a>
 				<ul class="dropdown-menu">
 					<li><a href="logout.jsp">로그아웃 </a></li>
+
 					<li><a href="delete.jsp">회원탈퇴 </a></li>
+
 					<li><a href="update.jsp">회원수정 </a></li>
 				</ul>	
 			</li>
