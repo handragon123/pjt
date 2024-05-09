@@ -116,11 +116,14 @@
 		%>		
 		<ul class="nav navbar-nav navbar-right">
 			<li class="dropdown">
-				<a href="#" class="dropdown-toggle"
+				<a href="list.jsp" class="dropdown-toggle"
 					data-toggle="dropdown" role="button" aria-haspopup="true"
 					aria-expanded="false">회원관리 <span class="caret">로그인 </span></a>
 				<ul class="dropdown-menu">
 					<li><a href="logout.jsp">로그아웃 </a></li>
+
+					<li><a href="delete.jsp">회원탈퇴 </a></li>
+
 					<li><a href="update.jsp">회원수정 </a></li>
 				</ul>	
 			</li>
