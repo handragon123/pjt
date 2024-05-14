@@ -154,7 +154,6 @@ public class BoardDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;				
 
-
 		String sql = "select fr_idx, fr_title, fr_cont,A.user_id, fr_regd, fr_visitnum, fr_like";
 		sql += " from free_board A, user B ";
 		sql += " where fr_idx = ? and A.user_id = B.user_id";

@@ -149,6 +149,7 @@ function commentInsert() {
  <button id="likeButton" onclick="like()">좋아요</button>
  <input type="button" value="좋아요" onclick="like();">
 	</td></tr>
+
 	
 </table>
 <table border="1">
