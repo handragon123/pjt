@@ -1,0 +1,339 @@
+:root {
+   --point-color1: #ffa500;
+   --point-color2: #f27405;
+   --txt-color-400: #999;
+   --txt-color-500: #666;
+   --txt-color-600: #000;
+}
+
+#header ul {
+   list-style: none;
+}
+
+#header {
+   position: fixed;
+   top: 0;
+   left: 0;
+   /* fixed요소 부모에 transform 있으면 창기준이 아닌 부모기준이 됨 */
+   /* transform: translateX(-50%); */
+   width: 100%;
+   z-index: 9999;
+   transition: all 0.3s;
+   background: #fff;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#header .inner {
+   max-width: 1440px;
+   height: 80px;
+   display: flex;
+   justify-content: center;
+   margin: 0 auto;
+   position: relative;
+}
+#header .logo {
+   width: 150px;
+   position: absolute;
+   left: 20px;
+   top: 50%;
+   transform: translateY(-50%);
+}
+
+#header .logo a {
+   display: block;
+   height: 70px;
+   background: url(../images/pjt_logo.png) no-repeat center/contain;
+}
+
+#header .gnb {
+   display: flex;
+   transition: all 0.2s;
+}
+
+#header .gnb>li {
+   padding: 0 50px;
+   position: relative;
+}
+
+#header .gnb>li>a {
+   display: block;
+   color: var(--txt-color-600);
+   line-height: 80px;
+   font-weight: 500;
+   transition: all 0.2s;
+}
+
+#header .gnb>li>a:hover {
+   color: var(--point-color1);
+}
+
+#header .login_wrap {
+   display: flex;
+   right: 20px;
+}
+
+#header .login_wrap>li {
+   padding: 0 5px;
+   position: relative;
+}
+
+#header .login_wrap>li>a {
+   color: var(--txt-color-600);
+   font-weight: 500;
+   font-size: 15px;
+}
+
+#header .login_area {
+   position: absolute;
+   right: 20px;
+   top: 50%;
+   transform: translateY(-50%);
+   display: flex;
+}
+
+#header .login_wrap a {
+   width: 100%;
+   border: none;
+   background: #f7f7f7;
+   border: 1px solid #f7f7f7;
+   color: var(--txt-color-600);
+   height: 34px;
+   border-radius: 17px;
+   text-align: center;
+   padding: 0 16px;
+   display: inline-flex;
+   align-items: center;
+   gap: 0 10px;
+   transition: all 0.2s;
+}
+
+#header .login_wrap a:hover {
+   background: var(--point-color1);
+   border: 1px solid var(--point-color1);
+   color: #fff;
+}
+
+
+#container {
+   position: relative;
+   top: 100px;
+   max-width:1200px;
+   margin: 0 auto;
+}
+
+#container .form-group {
+   margin-bottom: 10px;
+}
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+#container .btn {
+   margin: 5px 0;
+}
+#container .col-lg-4 {
+      margin: 0 auto;
+      width: 50%;
+   }
+
+
+#wrap .main_banner {
+	max-width: 1440px;
+    position: relative;
+    margin: auto;
+    margin-top: 120px;
+}
+
+.swiper-slide {
+    width: 100%; /* 부모 요소인 .swiper에 대해 100%의 너비를 설정합니다. */
+    height: 100%; /* 부모 요소인 .swiper에 대해 100%의 높이를 설정합니다. */
+}
+
+/* 이미지가 꽉 차게 하려면 아래와 같이 설정할 수도 있습니다. */
+.swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 이미지를 요소에 맞게 조정합니다. */
+}
+
+
+table {
+   width: 100%;
+   border-collapse: collapse;
+   margin-bottom: 20px;
+}
+
+th, td {
+   padding: 10px;
+   text-align: center;
+   border: 1px solid #ddd; /* Add border */
+}
+
+th {
+   background-color: #f2f2f2;
+   font-weight: bold;
+}
+
+tr:nth-child(odd) {
+   background-color: #f2f2f2;
+}
+
+tr:hover {
+   background-color: #ddd;
+}
+.btn1 {
+   color: #fff;
+}
+.btn-primary {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: var(--point-color1);
+    --bs-btn-border-color: var(--point-color1);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: var(--point-color2);
+    --bs-btn-hover-border-color: var(--point-color2);
+    --bs-btn-focus-shadow-rgb: 49, 132, 253;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: var(--point-color2);
+    --bs-btn-active-border-color: var(--point-color2);
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: #0d6efd;
+    --bs-btn-disabled-border-color: #0d6efd;
+}
+
+
+.main_service {
+  padding-bottom: 70px;
+  width: 100%;
+}
+.main_service .inner {
+  margin:0 auto;
+  max-width: 1244px;
+}
+.main_service h2 {
+  font-size: 32px;
+  line-height: 1.8em;
+  font-weight: 500;
+  color:#ffa500;
+  margin-top: 50px;
+}
+.main_service .main_service_group {
+  display: flex;
+  flex-direction: column;
+  gap: 30px 0;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+@keyframes marquee2 {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+.main_service .service_row1 {
+  overflow: hidden;
+}
+.main_service .marqueebox {
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  height: 310px;
+}
+.main_service .marquee {
+  position: absolute;
+  display: flex;
+  gap: 0 30px;
+  animation: marquee 40s linear infinite;
+}
+.main_service .service_row1 .marquee {
+  width: 2730px;
+}
+
+.main_service .marquee.marquee_2 {
+  animation-delay: -20s;
+}
+.main_service .marquee.marquee_3 {
+  animation-delay: -40s;
+}
+
+.main_service .marquee li {
+  display: inline-block;
+  width: 310px;
+}
+.main_service .marquee a {
+  display: block;
+  height: 310px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 30px;
+  border-radius: 20px;
+  background: url(../images/food1.png) no-repeat center / 100%;
+  transition: all 0.3s;
+}
+/*
+.main_service .marquee_wrap {
+  display: flex;
+  position: absolute;
+  gap: 0 20px;
+  left: 0;
+  top: 0;
+}*/
+
+.main_service .marquee .marquee2 a{
+  border-radius: 20px;
+} 
+
+.main_service .marquee .marquee3 a {
+  background-image:url(../images/food2.png);
+}
+
+.main_service .marquee .marquee3 a:hover  {
+  background-image: url(../images/food3.png);
+}
+
+.main_service .marquee .marquee4 a {
+  background-image: url(../images/food4.png);
+  border-radius: 20px;
+}
+.main_service .marquee .marquee5 a {
+  background-image: url(../images/food5.png);
+  border-radius: 20px;
+}
+.main_service .marquee .marquee6 a {
+  background-image: url(../images/food6.png);
+  border-radius: 20px;
+}
+.main_service .marquee .marquee7 a {
+  background-image: url(../images/food7.png);
+  border-radius: 20px;
+}
+.main_service .marquee .marquee8 a {
+  background-image: url(../images/food8.png);
+  border-radius: 20px;
+}
+.main_service .marquee .marquee1 a {
+  background-image: url(../images/food4.png);
+  border-radius: 20px;
+}
+
+
+
+
+
+
+@media ( min-width : 992px) {
+   .container .col-lg-4 {
+      margin: 0 auto;
+      width: 50%;
+   }
+}

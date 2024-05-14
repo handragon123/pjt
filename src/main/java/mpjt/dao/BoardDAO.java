@@ -15,8 +15,12 @@ import mpjt.common.JDBCConnect;
 public class BoardDAO {
 	
 	// 제목 내용 글 검색
+	public List<BoardDTO> selectList(){
+		return null;
+	}
+	
+	
 	public List<BoardDTO> selectList(Map<String, String> map){
-
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;				
@@ -28,12 +32,13 @@ public class BoardDAO {
 		}	
 
 		List<BoardDTO> bbs = new ArrayList<BoardDTO>();
-		String sql = "select fr_idx, user_id,fr_title,fr_cont,fr_visitnum, fr_like, fr_regd from free_board";
+		String sql = "select fr_idx, user_id,fr_title, fr_cont, fr_visitnum, fr_like, fr_file, fr_regd from free_board ";
 		if(isSearch) {
 			sql += " where " + map.get("searchField") + " like ? ";
 		}
-		sql += " order by fr_idx desc";
-
+		sql += " order by fr_idx desc ";
+		sql += " limit ? offset ?"; // 2page
+		
 		conn = JDBCConnect.getConnection();
 
 		try {
@@ -41,30 +46,35 @@ public class BoardDAO {
 			if(isSearch) {
 				pstmt.setString(1, "%" + map.get("searchWord") + "%");
 			}
+			pstmt.setInt(1, Integer.parseInt(map.get("amount")));
+			pstmt.setInt(2, Integer.parseInt(map.get("offset")));
+			
 			rs = pstmt.executeQuery();
 
 			while(rs.next()) {
-				int fr_idx = rs.getInt("fr_idx");
-				String user_id = rs.getString("user_id");
+				int num = rs.getInt("fr_idx");
+				String id = rs.getString("user_id");
 				String title = rs.getString("fr_title");
 				String cont = rs.getString("fr_cont");
-				int visitnum = rs.getInt("fr_visitnum");
+				int visitcount = rs.getInt("fr_visitnum");
 				int like = rs.getInt("fr_like");
+				String file = rs.getString("fr_file");
 				String regd = rs.getString("fr_regd");
-				BoardDTO dto = new BoardDTO(fr_idx, user_id, title, cont, visitnum, like, regd);
+				
+				BoardDTO dto = new BoardDTO(num, id, title, cont, visitcount, like, file, regd);
+				dto.setFr_file(file);
 				bbs.add(dto);
 			}
-
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			JDBCConnect.close(rs, pstmt, conn);
 		}
-
-
-
 		return bbs;
 	}
+
+	
 	
 	// 전체 글 갯수 출력
 	public int selectCount(Map<String, String> map){
@@ -85,7 +95,6 @@ public class BoardDAO {
 			//sql += " and " + map.get("searchField") + " like concat('%',?,'%')";
 			sql += " where " + map.get("searchField") + " like ? ";
 		}
-		System.out.println(sql);
 		conn = JDBCConnect.getConnection();
 
 		try {
@@ -140,14 +149,12 @@ public class BoardDAO {
 	
 
 	// 게시글 보기
-
 	public BoardDTO selectView(BoardDTO dto){
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;				
 
-
-		String sql = "select fr_idx, fr_title, fr_cont, A.user_id, fr_regd, fr_visitnum";
+		String sql = "select fr_idx, fr_title, fr_cont,A.user_id, fr_regd, fr_visitnum, fr_like";
 		sql += " from free_board A, user B ";
 		sql += " where fr_idx = ? and A.user_id = B.user_id";
 		conn = JDBCConnect.getConnection();
@@ -165,12 +172,9 @@ public class BoardDAO {
 				String id = rs.getString("user_id");
 				String postdate = rs.getString("fr_regd");
 				int visitcount = rs.getInt("fr_visitnum");
-				dto = new BoardDTO(num, title, content, id, postdate, visitcount);				
+				int like = rs.getInt("fr_like");
+				dto = new BoardDTO(num, title, content, id, postdate, visitcount, like);				
 			}
-
-
-
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -237,6 +241,7 @@ public class BoardDAO {
 	    }
 	    return rs;
 	}
+	
 	// 게시글 삭제
 	public int deleteWrite(BoardDTO dto) {
 		Connection conn = null;
@@ -264,5 +269,44 @@ public class BoardDAO {
 	    }
 	    return rs;
 	}
+	
+	// 좋아요
+	public int like(BoardDTO dto) {
+	    Connection conn = null;
+	    PreparedStatement pstmt = null;
+	    int likes = 0; // 좋아요 수를 저장할 변수 추가
+	    try {
+	        // 1. Connection
+	        conn = JDBCConnect.getConnection();
 
+	        // 2. SQL + 쿼리문
+	        String sql = "UPDATE free_board SET fr_like = fr_like + 1 WHERE fr_idx = ?";
+	        pstmt = conn.prepareStatement(sql);
+
+	        // 3. ?에 값 세팅
+	        pstmt.setInt(1, dto.getFr_idx());
+
+	        // 4. execute 실행
+	        int affectedRows = pstmt.executeUpdate();
+
+	        if (affectedRows > 0) {
+	        	
+	            // 좋아요 수가 성공적으로 업데이트되었다면, 해당 글의 좋아요 수를 조회하여 반환
+	            sql = "SELECT fr_like FROM free_board WHERE fr_idx = ?";
+	            pstmt = conn.prepareStatement(sql);
+	            pstmt.setInt(1, dto.getFr_idx());
+	            ResultSet rs = pstmt.executeQuery();
+
+	            if (rs.next()) {
+	                likes = rs.getInt("fr_like");
+	            }
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        JDBCConnect.close(pstmt, conn);
+	    }
+	    return likes;
+	}
+	
 }

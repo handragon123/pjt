@@ -5,44 +5,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-	crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/common.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main.css" />
 <title>JSP 게시판 웹 사이트 </title>
 </head>
 <body>
-	<nav class="navbar navbar-default">
-	<div class="navbar-header">
-		<button type="button" class="navbar-toggle collapsed"
-		data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-		aria-expanded="false">
-		<span class="icon-bar"></span>
-		<span class="icon-bar"></span>
-		<span class="icon-bar"></span>
-		</button>
-		<a class="navbar-brand" href="main.jsp">JSP게시판 웹 사이트 </a>
-	</div>
-	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-		<ul class="nav navbar-nav">
-			<li><a href="main.jsp">메인 </a></li>
-			<li><a href="bbs.jsp">게시판 </a></li>
-		</ul>
-		<ul class="nav navbar-nav navbar-right">
-			<li class="dropdown">
-				<a href="#" class="dropdown-toggle"
-					data-toggle="dropdown" role="button" aria-haspopup="true"
-					aria-expanded="false">접속하기 <span class="caret">로그인 </span></a>
-				<ul class="dropdown-menu">
-					<li class="active"><a href="login.jsp">로그인 </a></li>
-					<li><a href="join.jsp">회원가입 </a></li>
-				</ul>	
-			</li>
-		</ul>
-	</div>
-	</nav>
-	<div class="container">
+<%@ include file="../common/menu.jsp" %>
+	<main id="container">
 		<div class="col-lg-4"></div>
 		<div class="col-lg-4">
 			<div class="jumbotron" style="padding-top: 20px;">
@@ -54,11 +24,11 @@
 				<div class="form-group">
 					<input type="password" class="form-control" placeholder="비밀번호 "name="user_password" maxlength="20">
 				</div>
-				<input type="submit" class="btn btn-primary form-control" value="로그인 ">
+				<input type="submit" class="btn btn-primary form-control login" value="로그인 ">
 				</form>
 		</div>
 		<div class="col-lg-4"></div>
-	</div>
+	</main>
 		<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

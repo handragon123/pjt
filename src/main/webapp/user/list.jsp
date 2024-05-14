@@ -1,3 +1,4 @@
+<%@page import="mpjt.common.PageDTO"%>
 <%@page import="mpjt.dto.UserDTO"%>
 <%@page import="mpjt.dao.UserDAO"%>
 <%@page import="java.util.ArrayList"%>
@@ -9,9 +10,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-request.setCharacterEncoding("utf-8"); 
-UserDAO dao = new UserDAO();
-List<UserDTO> userList =  dao.getUsers();
+List<UserDTO> userList =  (List<UserDTO>)request.getAttribute("userList");
 %>   
 <!DOCTYPE html>
 <html>
@@ -37,6 +36,22 @@ List<UserDTO> userList =  dao.getUsers();
 %>
 <tr><td><%=idx %><td><%=id %></td><td><%=password %></td><td><%=name %></td><td><%=gen %></td><td><%=user_regd %></td><td><%=user_upd %></td></tr>
 <%} %>
+<% 
+PageDTO p = (PageDTO)request.getAttribute("paging");
+%>
+<tr>
+<td colspan="6">
+<%if(p.isPrev()) {%><a href="userListPage.do?pageNum=<%=p.getStartPage()-1%>">[Prev]</a><%} %>
+<%for(int i=p.getStartPage(); i<= p.getEndPage(); i++) {%>
+	<%if(i == p.getPageNum()){%>
+		<b>[<%=i %>]</b>
+	<%}else{ %>
+	<a href="userListPage.do?pageNum=<%=i%>">[<%=i %>]</a>
+	<%} %>
+<%} %>
+<%if(p.isNext()){%><a href="userListPage.do?pageNum=<%=p.getEndPage()+1%>">[Next]</a><%} %>
+</td>
+</tr>
 </table>
 
 </body>
