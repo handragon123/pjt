@@ -24,7 +24,7 @@ public class UserDAO {
          conn = JDBCConnect.getConnection();
          
          // 3. sql창
-         String sql = "select user_idx, user_id, user_password, user_name, user_gen, user_upd, user_regd from user;";
+         String sql = "select user_idx, user_id, user_password, user_name, user_gen, user_upd, user_regd, user_role from user;";
          pstmt = conn.prepareStatement(sql);
          // 4. execute
          rs = pstmt.executeQuery();
@@ -37,7 +37,8 @@ public class UserDAO {
             String gen = rs.getString("user_gen");
             String update = rs.getString("user_upd");
             String regdate = rs.getString("user_regd");
-            UserDTO dto = new UserDTO(idx, id, password, name, gen, update, regdate);
+            String role = rs.getString("user_role");
+            UserDTO dto = new UserDTO(idx, id, password, name, gen, update, regdate, role);
             userList.add(dto);
          }
       }catch(Exception e) {
@@ -47,7 +48,46 @@ public class UserDAO {
       }
       return userList;
    }
-      
+   
+   public List<UserDTO> getUsers(int listNum, int offset){
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;		
+
+		List<UserDTO> userList = new ArrayList<>();
+
+		try{
+			// 2. connection
+			conn = JDBCConnect.getConnection();			
+			
+			// 3. sql창
+			String sql = "select user_idx, user_id, user_password, user_name, user_gen, user_upd, user_regd, user_role from user";
+			sql += " limit ? offset ?"; // 2page
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, listNum);
+			pstmt.setInt(2, offset);
+			// 4. execute
+			rs = pstmt.executeQuery();
+			// 5. rs처리 : id값만 list에 저장
+			while(rs.next()) {
+				int idx = rs.getInt("user_idx");
+	            String id = rs.getString("user_id");
+	            String password = rs.getString("user_password");
+	            String name = rs.getString("user_name");
+	            String gen = rs.getString("user_gen");
+	            String update = rs.getString("user_upd");
+	            String regdate = rs.getString("user_regd");
+	            String role = rs.getString("user_role");
+	            UserDTO dto = new UserDTO(idx, id, password, name, gen, update, regdate, role);
+	            userList.add(dto);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			JDBCConnect.close(rs, pstmt, conn);
+		}
+		return userList;
+	}
    
    public int login(String user_id, String user_password) { // 내가 sql에 지정한 변수로 써야함 
       Connection conn = null;
@@ -84,7 +124,7 @@ public class UserDAO {
 	       conn = JDBCConnect.getConnection();
 	       
 	       // 3. sql + 쿼리창
-	       String sql = "insert into user(user_id, user_password, user_name, user_gen) values(?,?,?,?)";
+	       String sql = "insert into user(user_id, user_password, user_name, user_gen, user_role) values(?,?,?,?,?)";
 	       pstmt = conn.prepareStatement(sql);
 	       
 	       // 4. ? 세팅
@@ -92,6 +132,7 @@ public class UserDAO {
 	       pstmt.setString(2, user.getUser_password());
 	       pstmt.setString(3, user.getUser_name());
 	       pstmt.setString(4, user.getUser_gen());
+	       pstmt.setString(5, user.getUser_role());
 	       
 	       // 5. execute 실행
 	       rs = pstmt.executeUpdate();

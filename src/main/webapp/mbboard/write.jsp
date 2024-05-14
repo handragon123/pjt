@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter" %>
+<%@ include file="../common/sessionCheck.jsp"%>  
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -36,7 +37,7 @@ function validateForm() {
 	<div class="container">
 	<div class="row">
 <h2>글쓰기</h2>
-<form name="writeForm" method="post" action="<%=request.getContextPath()%>/WriteProc">
+<form name="writeForm" method="post" action="<%=request.getContextPath()%>/WriteProc.bo">
 	<table border="1" width="90%">
 		<tr><td>Title</td><td><input type="text" name="title" style="width:90%"></td></tr>
 		<tr><td>Content</td>

@@ -3,7 +3,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../common/sessionCheck.jsp"%>      
+<%@ include file="../common/sessionCheck.jsp"%>
 <% // param
 request.setCharacterEncoding("utf-8");
 String sNum = request.getParameter("num"); 
@@ -47,7 +47,7 @@ function validateForm() {
 <body>
 <h2>글 수정하기 </h2>
 <form name="writeForm" 
-	action="<%=request.getContextPath() %>/board/UpdateProc" 
+	action="<%=request.getContextPath() %>/board/UpdateProc.bo" 
 	method="post">
 	<input type="hidden" name="num" value="<%=num%>">
 	<table border="1" width="90%">
@@ -67,8 +67,8 @@ function validateForm() {
 		<textarea name="content" style="width:90%; height:100px"><%=dto.getFr_cont() %></textarea>
 		</td></tr>
 		<tr><td colspan="4">
-		<a href="bbs.jsp">[List]</a> |  
-		<a href="view.jsp?num=<%=num%>">[View]</a> |		
+		<a href="bbs.bo">[List]</a> |  
+		<a href="view.bo?num=<%=num%>">[View]</a> |		
 	<%if(session.getAttribute("user_id") != null && session.getAttribute("user_id").equals(dto.getUser_id())) {%>
 		<a href="javascript:validateForm();">[Update]</a> 
 	<%} %>

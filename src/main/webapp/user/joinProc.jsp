@@ -47,14 +47,15 @@ request.setCharacterEncoding("UTF-8");
 		String password = request.getParameter("user_password");
 		String name = request.getParameter("user_name");
 		String gen = request.getParameter("user_gen");
+		String role = request.getParameter("user_role");
 
 		// 2. 받은 값 찍어보기
-		System.out.printf("%s,%s,%s,%s", id, password, name, gen);
+		System.out.printf("%s,%s,%s,%s,%s", id, password, name, gen, role);
 		
 		
 		UserDAO userDAO = new UserDAO();
 		// dto에 값 넣기
-		UserDTO dto = new UserDTO(id, password, name, gen);
+		UserDTO dto = new UserDTO(id, password, name, gen, role);
 		
 		// user.join 실행후 result값 리턴받기
 		int result = userDAO.join(user);

@@ -1,6 +1,7 @@
 package mpjt.controller;
 
 import java.io.IOException;
+
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -11,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-//import mpjt.common.PageDTO;
+import mpjt.common.PageDTO;
 import mpjt.dao.UserDAO;
 import mpjt.dto.UserDTO;
 
@@ -35,11 +36,40 @@ public class UserController extends HttpServlet {
 		String uri = request.getRequestURI();
 		String action = uri.substring(uri.lastIndexOf("/"));
 		System.out.println(uri);
-//		if(action.equals("/join.do")) {
-//			// move. get, 2. forward - reqeust.setAttribute("v","o")
-//			String path = request.getContextPath() + "/user/join.jsp";
-//			response.sendRedirect(path);
-//		}else if(action.equals("/main.do")) { // main.jsp
+		if(action.equals("/join.do")) {
+			// move. get, 2. forward - reqeust.setAttribute("v","o")
+			String path = request.getContextPath() + "/user/join.jsp";
+			response.sendRedirect(path);
+		}else if(action.equals("/userListPage.do")) { // main.jsp
+			
+			// paging info
+			int amount = 10;
+			int pageNum = 1;
+			
+			String sPageNum = request.getParameter("pageNum");
+			if(sPageNum != null) pageNum = Integer.parseInt(sPageNum);
+
+			// service : dao
+			UserDAO dao = new UserDAO();
+			int offset = (pageNum-1) * amount;
+			List<UserDTO> userList =  dao.getUsers(amount, offset);
+			
+			// totalcount
+			int totalCount = dao.getUsers().size();
+			
+			// Paging
+			PageDTO paging = new PageDTO(pageNum, amount, totalCount);			
+			
+			request.setAttribute("userList", userList);
+			request.setAttribute("paging", paging);
+			// move. get, 2. forward - reqeust.setAttribute("v","o")
+
+			String path =  "./list.jsp"; // 1
+			request.getRequestDispatcher(path).forward(request, response);
+
+
+		}
+		//else if(action.equals("/main.do")) { // main.jsp
 //			// move. get, 2. forward - reqeust.setAttribute("v","o")
 //			String path = request.getContextPath() + "/user/main.jsp";
 //			response.sendRedirect(path);

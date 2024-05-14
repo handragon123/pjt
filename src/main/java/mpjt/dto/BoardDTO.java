@@ -3,7 +3,6 @@ package mpjt.dto;
 public class BoardDTO {
 	private int fr_idx;
 	private String user_id;
-	private int user_idx;
 	private String fr_title;
 	private String fr_cont;
 	private int fr_visitnum;
@@ -44,6 +43,39 @@ public class BoardDTO {
 		this.fr_regd = fr_regd;
 	}
 	
+	public BoardDTO(int fr_idx, String fr_title, String fr_cont, String user_id, String fr_regd, int fr_visitnum, int fr_like) {
+		this.fr_idx = fr_idx;
+		this.fr_title = fr_title;
+		this.fr_cont = fr_cont;
+		this.user_id = user_id;
+		this.fr_regd = fr_regd;
+		this.fr_visitnum = fr_visitnum;
+		this.fr_like = fr_like;
+	}
+	
+	public BoardDTO(int fr_idx, String user_id, String fr_title, String fr_cont, int fr_visitnum, int fr_like,
+			String fr_file, String fr_regd) {
+		super();
+		this.fr_idx = fr_idx;
+		this.user_id = user_id;
+		this.fr_title = fr_title;
+		this.fr_cont = fr_cont;
+		this.fr_visitnum = fr_visitnum;
+		this.fr_like = fr_like;
+		this.fr_file = fr_file;
+		this.fr_regd = fr_regd;
+	}
+
+	
+	public BoardDTO(String user_id, String fr_title, String fr_cont, int fr_visitnum, int fr_like) {
+		super();
+		this.user_id = user_id;
+		this.fr_title = fr_title;
+		this.fr_cont = fr_cont;
+		this.fr_visitnum = fr_visitnum;
+		this.fr_like = fr_like;
+	}
+
 	public int getFr_idx() {
 		return fr_idx;
 	}
@@ -55,12 +87,6 @@ public class BoardDTO {
 	}
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
-	}
-	public int getUser_idx() {
-		return user_idx;
-	}
-	public void setUser_idx(int user_idx) {
-		this.user_idx = user_idx;
 	}
 	public String getFr_title() {
 		return fr_title;
